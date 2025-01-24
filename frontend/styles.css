@@ -1,0 +1,111 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: linear-gradient(to right, #1b0677, #7471f1); 
+}
+
+#app {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  /* background-color: rgb(144, 248, 231);*/
+  /* border: 1px solid #777777;*/
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 50px;
+  font-size: 65px;
+}
+
+#filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+input, select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #b6a8a8;
+}
+
+.event-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.event-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 20px;
+  text-align: center;
+}
+
+.event-card h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+.event-card .status {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.event-card .status.Ativo {
+  background-color: #4caf50;
+}
+
+.event-card .status.Inativo {
+  background-color: #f44336;
+}
+
+.event-card a {
+  display: inline-block;
+  margin-top: 15px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.event-card a:hover {
+  text-decoration: underline;
+}
+
+#no-events-message {
+  color: #f44336;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#clear-filters {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4caf50; 
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+}
+
+#clear-filters:hover {
+  background-color: #45a049; /* Cor ao passar o mouse */
+}
+
+#clear-filters:focus {
+  outline: 2px solid #333; /* Realce ao focar */
+  outline-offset: 3;
+}

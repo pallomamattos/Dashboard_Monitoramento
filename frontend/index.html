@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt" aria-label="Dashboard de Eventos">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Eventos</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+  <div id="app" role="main" aria-labelledby="dashboard-title">
+    <h1 id="dashboard-title">Monitoramento de Eventos</h1>
+    <div id="filters" role="region" aria-label="Filtros de eventos">
+      <input 
+        type="text" 
+        id="search" 
+        placeholder="Buscar por nome" 
+        aria-label="Campo de busca por nome de evento">
+      <select id="status-filter" aria-label="Filtro por status">
+        <option value="">Todos os Status</option>
+        <option value="Ativo">Ativo</option>
+        <option value="Inativo">Inativo</option>
+      </select>
+      <button id="clear-filters" aria-label="Limpar filtros">Limpar Filtros</button>
+    </div>
+    
+    <div id="events-list" class="event-cards" role="region" aria-live="polite">
+      <!-- Cartões dinâmicos -->
+    </div>
+    <p id="no-events-message" style="display: none;" role="alert">Nenhum evento encontrado.</p>
+  </div>
+  
+  <script src="main.js"></script>
+</body>
+</html>

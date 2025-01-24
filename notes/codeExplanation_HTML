@@ -1,0 +1,111 @@
+# Explicação do Código - JS
+
+## Definição das Constantes
+```javascript
+const API_URL = 'http://localhost:000';
+```
+- **API_URL**: Define a URL base da API onde os dados dos eventos serão buscados.
+
+```javascript
+const socket = io(API_URL);
+```
+- **socket**: Cria uma conexão WebSocket com o servidor definido na URL `API_URL`, permitindo comunicação em tempo real.
+
+---
+
+## Função `loadEvents`
+
+```javascript
+async function loadEvents() {
+  try {
+    const response = await fetch(`${API_URL}/events`);
+    const events = await response.json();
+    renderEventCards(events);
+  } catch (error) {
+    console.error('Erro ao carregar eventos:', error);
+    alert('Erro ao carregar eventos.');
+  }
+}
+```
+- **Propósito**: Carrega a lista de eventos do servidor.
+- **Passos**:
+  1. Faz uma requisição HTTP para `API_URL/events` usando `fetch`.
+  2. Converte a resposta em JSON.
+  3. Chama a função `renderEventCards` para exibir os eventos na página.
+  4. Caso ocorra um erro, exibe uma mensagem no console e alerta o usuário.
+
+---
+
+## Função `renderEventCards`
+
+```javascript
+function renderEventCards(events) {
+  const eventsList = document.getElementById('events-list');
+  eventsList.innerHTML = '';
+
+  events.forEach(event => {
+    const card = document.createElement('div');
+    card.className = 'event-card';
+
+    card.innerHTML = `
+      <h3>${event.name}</h3>
+      <p><strong>Status:</strong> ${event.status}</p>
+      <p><strong>Data:</strong> ${event.created_at}</p>
+      <div class="status ${event.status}">${event.status}</div>
+      <a href="event-details.html?id=${event.id}">Ver Detalhes</a>
+    `;
+
+    eventsList.appendChild(card);
+  });
+}
+```
+- **Propósito**: Renderiza cada evento em um cartão HTML.
+- **Passos**:
+  1. Seleciona o elemento HTML com o ID `events-list`.
+  2. Limpa o conteúdo existente.
+  3. Para cada evento da lista:
+     - Cria um elemento `div` com a classe `event-card`.
+     - Define o conteúdo HTML do cartão usando `innerHTML`.
+     - Adiciona o cartão ao elemento `events-list`.
+
+---
+
+## WebSocket - Atualização em Tempo Real
+
+```javascript
+socket.on('event_updated', (event) => {
+  alert(`Evento atualizado: ${event.name} agora está ${event.status}`);
+  loadEvents();
+});
+```
+- **Propósito**: Monitora atualizações em tempo real no servidor.
+- **Passos**:
+  1. Escuta o evento `event_updated` emitido pelo servidor.
+  2. Exibe um alerta com as informações do evento atualizado.
+  3. Chama `loadEvents` para recarregar os dados e exibir as alterações na página.
+
+---
+
+## Inicialização da Página
+
+```javascript
+if (document.body.id === 'details') {
+  loadEventDetails();
+} else {
+  loadEvents();
+}
+```
+- **Propósito**: Decide qual função será executada ao carregar a página.
+- **Passos**:
+  1. Verifica o `id` do elemento `body`:
+     - Se o `id` for `details`, chama a função `loadEventDetails` (não fornecida neste código).
+     - Caso contrário, chama `loadEvents` para carregar os eventos no dashboard.
+
+---
+
+## Resumo
+Este código:
+1. Faz requisições à API para buscar eventos.
+2. Renderiza os eventos em cartões HTML.
+3. Escuta atualizações em tempo real usando WebSocket.
+4. Decide o comportamento inicial da página com base no contexto (`dashboard` ou `detalhes`).
